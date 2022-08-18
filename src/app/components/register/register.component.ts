@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UsersService } from '../../users/users.service';
 
 @Component({
   selector: 'app-register',
@@ -16,19 +16,24 @@ export class RegisterComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor( public userService: UsersService ) { }
 
   ngOnInit(): void {
   }
 
-  register(){
-    console.log(this.name);
-    console.log(this.lastName);
-    console.log(this.city);
-    console.log(this.address);
-    console.log(this.phoneNumber);
-    console.log(this.email);
-    console.log(this.password);
+  register() {
+    const user = {  
+      name: this.name,
+      lastName: this.lastName,
+      city: this.city,
+      address: this.address,
+      phonenumber: this.phoneNumber,
+      email: this.email,
+      password: this.password
+    };
+    this.userService.register(user).subscribe(data => {
+      this.userService.setToken(data.token);
+    });
   }
 
 }

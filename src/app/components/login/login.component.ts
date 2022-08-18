@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UsersService } from '../../users/users.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+
 
 @Component({
   selector: 'app-login',
@@ -13,11 +14,13 @@ export class LoginComponent implements OnInit {
   email: string = '';
   password: string = '';
 
-  constructor() {}
+  constructor(public userService: UsersService) {}
 
-  login(){
-    console.log(this.email);
-    console.log(this.password);
+  login() {
+    const user = {email: this.email, password: this.password};
+    this.userService.login(user).subscribe( data => {
+      this.userService.setToken(data.token);
+    });
   }
 
   ngOnInit(): void {
