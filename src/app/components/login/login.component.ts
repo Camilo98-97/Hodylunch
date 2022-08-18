@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +9,18 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  public formularioLogin: FormGroup;
-  public hide: boolean = true;
-  public cargandoBoton: boolean = false;
   
-  constructor() { }
+  email: string = '';
+  password: string = '';
+
+  constructor() {}
+
+  login(){
+    console.log(this.email);
+    console.log(this.password);
+  }
 
   ngOnInit(): void {
   }
-
-  enviarFormulario(): void {}
 
 }
